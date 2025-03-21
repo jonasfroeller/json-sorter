@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { SortControl } from './components/SortControl';
 import { Copy, Table, FileText, Check } from 'lucide-react';
 import { defaultData } from './data';
@@ -77,10 +77,10 @@ function App() {
   }, [sortedData]);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-6xl mx-auto space-y-8">
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <h2 className="text-lg font-semibold text-gray-700 mb-4">JSON Data</h2>
+    <div className="p-8 min-h-screen bg-gray-100">
+      <div className="mx-auto space-y-8 max-w-6xl">
+        <div className="p-6 bg-white rounded-xl shadow-lg">
+          <h2 className="mb-4 text-lg font-semibold text-gray-700">JSON Data</h2>
           <textarea
             value={jsonInput}
             onChange={(e) => setJsonInput(e.target.value)}
@@ -93,13 +93,13 @@ function App() {
             <p className="mt-2 text-sm text-red-600">{jsonError}</p>
           )}
         </div>
-        <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
+        <div className="p-6 space-y-6 bg-white rounded-xl shadow-lg">
           <SortControl
             sortConfig={sortConfig}
             onSortChange={setSortConfig}
             sortableKeys={sortableKeys}
           />
-          <div className="flex justify-between items-center border-t pt-6">
+          <div className="flex justify-between items-center pt-6 border-t">
             <div className="flex gap-2">
               <button
                 onClick={() => setView('table')}
@@ -133,13 +133,13 @@ function App() {
         </div>
         
         {view === 'table' ? (
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="overflow-hidden bg-white rounded-xl shadow-lg">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50">
                 <tr>
                   {sortableKeys.map(({ key, label }) => (
-                    <th key={key} className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th key={key} className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                       {label}
                     </th>
                   ))}
@@ -149,7 +149,7 @@ function App() {
                 {sortedData.map((item, index) => (
                   <tr key={index} className="hover:bg-gray-50">
                     {sortableKeys.map(({ key }) => (
-                      <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td key={key} className="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">
                         {item[key]}
                       </td>
                     ))}
@@ -160,8 +160,8 @@ function App() {
           </div>
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <pre className="overflow-x-auto text-sm font-mono whitespace-pre">
+          <div className="p-6 bg-white rounded-xl shadow-lg">
+            <pre className="overflow-x-auto font-mono text-sm whitespace-pre">
               {JSON.stringify(sortedData, null, 2)}
             </pre>
           </div>
